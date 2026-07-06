@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Default Dashboard (Temporary)
+| Default Dashboard
 |--------------------------------------------------------------------------
 */
 
@@ -47,15 +47,12 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'role:admin'])
-    ->prefix('admin')
-    ->name('admin.')
-    ->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
 
-        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
-            ->name('dashboard');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
+        ->name('admin.dashboard');
 
-    });
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -63,15 +60,12 @@ Route::middleware(['auth', 'role:admin'])
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'role:instructor'])
-    ->prefix('instructor')
-    ->name('instructor.')
-    ->group(function () {
+Route::middleware(['auth', 'role:instructor'])->group(function () {
 
-        Route::get('/dashboard', [InstructorDashboardController::class, 'index'])
-            ->name('dashboard');
+    Route::get('/instructor/dashboard', [InstructorDashboardController::class, 'index'])
+        ->name('instructor.dashboard');
 
-    });
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -79,14 +73,11 @@ Route::middleware(['auth', 'role:instructor'])
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'role:student'])
-    ->prefix('student')
-    ->name('student.')
-    ->group(function () {
+Route::middleware(['auth', 'role:student'])->group(function () {
 
-        Route::get('/dashboard', [StudentDashboardController::class, 'index'])
-            ->name('dashboard');
+    Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])
+        ->name('student.dashboard');
 
-    });
+});
 
 require __DIR__.'/auth.php';
